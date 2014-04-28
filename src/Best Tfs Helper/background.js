@@ -18,7 +18,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
 			{ 'name': 'Auto', 'prefix': 'AUTO', 'color': '#0000ff' },
 			{ 'name': 'Doc', 'prefix': 'DOC', 'color': '#c2c2c2' }],
 		'alerts': [
-			{ 'name': 'Waiting', 'keyword': 'Waiting', 'color': '#FFC7CE'}
+			{ 'name': 'Waiting', 'keyword': 'Waiting, Blocked', 'color': '#FFC7CE'}
 		],	
 		'tfsUrl': 'tfs'
 	};
