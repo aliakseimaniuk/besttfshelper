@@ -1,0 +1,52 @@
+<html>
+<head>
+    <title>My Test Extension Options</title>
+    <script src="jquery.min.js"></script>
+    <script src="options.js"></script>
+</head>
+<body>
+    <h1>Best Tfs helper settings</h1>
+    <form>
+        <fieldset>
+            <legend>Add here prefix for item that you want to color, and select color for them</legend>
+            <div id="prefixes-container"></div>
+            <input type="button" id="add-button" value="Add new type" />
+        </fieldset>
+        <fieldset>
+            <legend>Add here prefix for item that you want to alert</legend>
+            <div id="keywords-container"></div>
+            <input type="button" id="add-keyword-button" value="Add new alert" />
+        </fieldset>
+        <fieldset>
+            <legend>Other settings</legend>
+            <ul>
+                <li>
+                    <label for="fade-cards">Fade cards instead of completely hiding them (prevents page from shaking)</label>
+                    <input type="checkbox" id="fade-cards" name="fade-cards" checked />
+                </li>
+                <li>
+                    Url for your tfs site (only part for example: pdstfs):
+                    <input type="text" id="url-input" />
+                </li>
+            </ul>
+        </fieldset>
+        <input type="button" id="save-button" value="Apply configuration" />
+    </form>
+    <script id="prefix-template" type="text/template">
+        <div class="card-type">
+            Name: <input type="text" class="name-input" value="{Name}" />
+            Prefix: <input type="text" class="prefix-input" value="{Prefix}" />
+            <input type="color" value="{Color}" class="color-input">
+            <input class="remove-button" type="button" value="Remove" />
+        </div>
+    </script>
+    <script id="keyword-template" type="text/template">
+        <div class="alerts">
+            Name: <input type="text" class="name-input" value="{Name}" />
+            Keyword: <input type="text" class="keyword-input" value="{Keyword}" />
+            <input type="color" value="{Color}" class="color-input">
+            <input class="remove-button" type="button" value="Remove" />
+        </div>
+    </script>
+</body>
+</html>
