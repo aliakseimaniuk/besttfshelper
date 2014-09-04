@@ -3,14 +3,15 @@ function generateReport(settings) {
 	var inProgressTasks = getTasks('In progress');
 	var doneTasks = getTasks('Done');
 	
-	console.log(dependencies + inProgressTasks + doneTasks);
-	//copyToClipboard(dependencies);
+	report = dependencies + inProgressTasks + doneTasks;
+	console.log(report);
 	
-	alert('Report was copied to clipboard.');
+	var reportWindow = window.open("Report Window", "Report Window", "width=500, height=500");
+	reportWindow.document.write(report);
 }
 	
 function getDependenciesForReport(settings)	{
-	var dependencies = 'Dependencies:\n';
+	var dependencies = 'Dependencies:<br />';
 		
 	settings.alerts.forEach(function(alert) {
 		parsePrefixes(alert.keyword).forEach(function (keyword) {
@@ -18,16 +19,16 @@ function getDependenciesForReport(settings)	{
 
 			$('.alert-' + keyword).each(function (index, card) {
 				var taskName = $(card).closest('.taskboard-row').find('.tbPivotItem').find('.witTitle').text();
-				dependencies += (index + 1) + ')' + taskName + ': ' + $(card).text() + '\n';
+				dependencies += (index + 1) + ')' + taskName + ': ' + $(card).text() + '<br />';
 			});										
 		});
 	});
 
-	return dependencies + '\n';
+	return dependencies + '<br />';
 }
 
 function getTasks(status) {
-	var tasks = status +':\n';
+	var tasks = status +':<br />';
 	var axis = '';
 	$('.witState').each(function (index, element) {
 		var header = $(element).text(); 
@@ -46,23 +47,13 @@ function getTasks(status) {
 			if (parentAxis == axis)
 			{
 				var taskName = $(elem).closest('.taskboard-row').find('.tbPivotItem').find('.witTitle').text();
-				tasks += i + ')' + taskName + '\n';
+				tasks += i + ')' + taskName + '<br />';
 				i++;
 			}
 		}
 	});
 
-	return tasks + '\n';
-}
-
-function copyToClipboard(text) {
-	document.oncopy = function(event) {
-		event.clipboardData.setData("Text", text);
-		event.preventDefault();
-	};
-
-	document.execCommand("Copy");
-	document.oncopy = undefined;
+	return tasks + '<br />';
 }
 
 function parsePrefixes(prefixes) {
