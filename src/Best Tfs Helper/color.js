@@ -1,5 +1,4 @@
 (function (chrome) {
-
 	chrome.storage.local.get("settings", function (item) {
 		var settings = item.settings;
 

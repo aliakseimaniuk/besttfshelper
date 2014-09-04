@@ -1,7 +1,7 @@
 (function (chrome) {
 
 	var htmlForCheckbox = '<input value="{Prefix}"type="checkbox" checked="checked"/><text style="color:{Color}">{Name}</text><br>';
-
+	
 	chrome.storage.local.get("settings", function (item) {
 		var settings = item.settings;
 
@@ -9,11 +9,17 @@
 			settings.cardTypes.forEach(function (elem) {
 				$('#place-holder').append(htmlForCheckbox.replace(/{Name}/g, elem.name).replace(/{Prefix}/g, elem.prefix).replace(/{Color}/g, elem.color));
 			});
+
 			$('input').click(onCheckBoxClick);
+			
 			chrome.storage.local.get('colorOnOffState', function (item) {
 				$("#color-on-off-button").val(item.colorOnOffState !== 'On' ? 'On' : 'Off');
 			});
+
 			$("#color-on-off-button").click(onTurnOnOffHighlightingClick);
+						
+			$("#generate-report-button").click(generateReport);
+
 			chrome.storage.local.get("checkboxState", function (item) {
 				item.checkboxState
 					.filter(function (elem) { return !elem.checked; })
@@ -94,5 +100,9 @@
 				.filter(function (value, index, self) { return self.indexOf(value) === index; });
 		}
 
+		function generateReport() {
+			var settingsStr = JSON.stringify(settings);
+			var report = chrome.tabs.executeScript(null, { code: 'generateReport('+ settingsStr +');' });
+		}
 	});
 }(chrome));

@@ -3,12 +3,12 @@
     "description": "Help with tfs",
     "version": "1.0",
     "permissions": [
-      "tabs",  "storage", "http://*/*", "https://*/*"
+      "tabs",  "storage", "http://*/*", "https://*/*", "clipboardWrite", "clipboardRead"
     ],
      "content_scripts": [
       { 
           "matches": [ "http://*/*", "https://*/*"],
-          "js": ["jquery.min.js"]
+          "js": ["jquery.min.js", "generateReport.js"]
       }
      ],
      "background": {
